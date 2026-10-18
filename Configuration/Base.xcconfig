@@ -1,0 +1,20 @@
+// Base settings shared by all targets and configurations.
+// Do not put secrets here. Per-developer values go into the gitignored
+// Signing.xcconfig and Config.xcconfig (copy the *.example.xcconfig files).
+
+// Defaults, overridden by Signing.xcconfig
+BUNDLE_ID_PREFIX = com.example.breaktimer
+DEVELOPMENT_TEAM =
+
+// Defaults, overridden by Config.xcconfig
+SUPABASE_URL =
+SUPABASE_ANON_KEY =
+SUPPORT_EMAIL =
+
+#include? "Signing.xcconfig"
+#include? "Config.xcconfig"
+
+// Every identifier is derived from BUNDLE_ID_PREFIX. Never change them once set.
+APP_BUNDLE_ID = $(BUNDLE_ID_PREFIX)
+WIDGET_BUNDLE_ID = $(BUNDLE_ID_PREFIX).widget
+APP_GROUP_ID = group.$(BUNDLE_ID_PREFIX)

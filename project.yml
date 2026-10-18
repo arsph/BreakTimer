@@ -1,0 +1,143 @@
+name: BreakTimer
+
+options:
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: de
+  createIntermediateGroups: true
+  groupSortPosition: top
+  generateEmptyDirectories: true
+
+configFiles:
+  Debug: Configuration/Base.xcconfig
+  Release: Configuration/Base.xcconfig
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Automatic
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
+    ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+    DEAD_CODE_STRIPPING: YES
+
+packages:
+  Supabase:
+    url: https://github.com/supabase/supabase-swift
+    from: 2.55.4 # tested version; Package.resolved lives in the generated (gitignored) project
+
+targets:
+  BreakTimer:
+    type: application
+    platform: iOS
+    sources:
+      - path: BreakTimer
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(APP_BUNDLE_ID)
+        PRODUCT_NAME: BreakTimer
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: YES
+    info:
+      path: BreakTimer/Resources/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: de
+        CFBundleDisplayName: BreakTimer
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleLocalizations: [de, en]
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        ITSAppUsesNonExemptEncryption: false
+        CFBundleURLTypes:
+          - CFBundleURLName: $(APP_BUNDLE_ID)
+            CFBundleURLSchemes: [breaktimer]
+        NSSupportsLiveActivities: true
+        AppGroupIdentifier: $(APP_GROUP_ID)
+        SupabaseURL: $(SUPABASE_URL)
+        SupabaseAnonKey: $(SUPABASE_ANON_KEY)
+        SupportEmail: $(SUPPORT_EMAIL)
+    entitlements:
+      path: BreakTimer/Resources/BreakTimer.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - $(APP_GROUP_ID)
+    dependencies:
+      - target: BreakTimerWidget
+        embed: true
+        codeSign: true
+      - package: Supabase
+        product: Supabase
+
+  BreakTimerWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: BreakTimerWidget
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(WIDGET_BUNDLE_ID)
+        PRODUCT_NAME: BreakTimerWidget
+        APPLICATION_EXTENSION_API_ONLY: YES
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME: WidgetBackground
+        ENABLE_PREVIEWS: YES
+        SKIP_INSTALL: YES
+    info:
+      path: BreakTimerWidget/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: de
+        CFBundleDisplayName: BreakTimer
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleLocalizations: [de, en]
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        AppGroupIdentifier: $(APP_GROUP_ID)
+    entitlements:
+      path: BreakTimerWidget/BreakTimerWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - $(APP_GROUP_ID)
+
+  BreakTimerTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: BreakTimerTests
+      # Pure logic only: compiled straight into the hostless test bundle.
+      - path: Shared/Budget
+      - path: Shared/Logging/EmailMasker.swift
+      - path: Shared/Logging/LogRetention.swift
+      - path: Shared/Logging/LogLine.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(BUNDLE_ID_PREFIX).tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  BreakTimer:
+    build:
+      targets:
+        BreakTimer: all
+        BreakTimerWidget: all
+        BreakTimerTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - BreakTimerTests
+    archive:
+      config: Release

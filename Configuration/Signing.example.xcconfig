@@ -1,0 +1,11 @@
+// Copy to Signing.xcconfig (gitignored) and fill in.
+//
+// DEVELOPMENT_TEAM: your Personal Team ID. In Xcode open Settings → Accounts,
+// select your Apple ID, then the team; or pick the team once in the target's
+// Signing & Capabilities tab and copy the value from the build settings.
+DEVELOPMENT_TEAM = ABCDE12345
+
+// A reverse-DNS prefix that is unique to you, e.g. com.yourname.breaktimer.
+// App = prefix, widget = prefix.widget, App Group = group.prefix.
+// Never change it after the first install, or the app loses its data.
+BUNDLE_ID_PREFIX = com.yourname.breaktimer
