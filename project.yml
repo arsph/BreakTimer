@@ -58,6 +58,8 @@ targets:
         UIApplicationSceneManifest:
           UIApplicationSupportsMultipleScenes: false
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        # Portrait-only iPhone app: opt out of iPad multitasking, which would require all orientations.
+        UIRequiresFullScreen: true
         ITSAppUsesNonExemptEncryption: false
         CFBundleURLTypes:
           - CFBundleURLName: $(APP_BUNDLE_ID)
