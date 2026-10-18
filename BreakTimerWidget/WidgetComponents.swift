@@ -3,8 +3,9 @@ import SwiftUI
 import WidgetKit
 
 extension Theme {
+    /// Warm espresso black / cream, matching the coffee accent. Also used by the Live Activity.
     static func widgetBackground(_ scheme: ColorScheme) -> Color {
-        scheme == .dark ? Color(red: 0.110, green: 0.118, blue: 0.122) : .white
+        scheme == .dark ? Color(red: 0.118, green: 0.098, blue: 0.082) : Color(red: 0.984, green: 0.969, blue: 0.949)
     }
 }
 

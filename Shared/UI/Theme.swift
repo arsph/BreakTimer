@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Theme {
-    /// Muted teal from the asset catalog (light/dark variants).
+    /// Coffee brown from the asset catalog: espresso in light mode, caramel in dark mode.
     static let accent = Color("AccentColor")
     static let low = Color.orange
     static let overtime = Color.red
