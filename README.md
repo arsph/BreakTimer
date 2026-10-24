@@ -104,7 +104,10 @@ Run `xcodegen generate` again whenever you add or remove files, or change `proje
    supabase functions deploy delete-account --project-ref your-project-ref
    ```
    It verifies the caller's JWT and deletes that user with the service role. Their rows are removed through `ON DELETE CASCADE`. `SUPABASE_URL`, `SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` are provided to Edge Functions automatically.
-6. **Email sending**: Supabase's built-in email service is heavily rate-limited and meant for testing. For real use, configure your own SMTP server under **Authentication → Emails → SMTP Settings**. The default email templates work as they are.
+6. **Email sending**: Supabase's built-in email service is heavily rate-limited, meant for testing, and sends as "Supabase Auth" with Supabase branding. For real use, configure your own SMTP server under **Authentication → Emails → SMTP Settings**, with sender name `BreakTimer` and an address on your own domain.
+7. **Email templates**: under **Authentication → Emails → Templates**, replace the defaults with the BreakTimer templates (German and English in one email):
+   - **Confirm signup**: subject `BreakTimer: Bestätige deine E-Mail-Adresse`, body from [`supabase/templates/confirmation.html`](supabase/templates/confirmation.html)
+   - **Reset password**: subject `BreakTimer: Passwort zurücksetzen`, body from [`supabase/templates/recovery.html`](supabase/templates/recovery.html)
 
 ## 3. Run in the Simulator
 
