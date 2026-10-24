@@ -99,6 +99,8 @@ Run `xcodegen generate` again whenever you add or remove files, or change `proje
      supabase db push
      ```
    This creates `break_sessions` and `user_settings` with row level security, so each user can only select, insert and update their own rows. It also adds a trigger that maintains `updated_at` and enforces "latest `updated_at` wins".
+
+   Then run `supabase/migrations/20261024000000_signup_ip_limit.sql` the same way, and enable its hook under **Authentication → Hooks → Before User Created**: type Postgres, schema `public`, function `breaktimer_before_user_created`. It allows at most 3 new registrations per IP address per hour; the 4th gets an error, and the app explains it.
 5. **Deploy the delete-account function**:
    ```bash
    supabase functions deploy delete-account --project-ref your-project-ref

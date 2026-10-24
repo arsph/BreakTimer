@@ -200,6 +200,7 @@ EN = {
         "We've sent a link to %@. Open it on this iPhone to activate your account.",
     "Wähle ein neues Passwort mit mindestens 8 Zeichen.": "Choose a new password with at least 8 characters.",
     "Zeitraum": "Period",
+    "Zu viele Registrierungen von diesem Netzwerk. Bitte versuche es in einer Stunde erneut.": "Too many sign-ups from this network. Please try again in an hour.",
     "Zu viele Versuche. Bitte warte einen Moment.": "Too many attempts. Please wait a moment.",
     "Zuletzt synchronisiert": "Last Synced",
     "Zum Bearbeiten tippen, zum Löschen wischen.": "Tap to edit, swipe to delete.",

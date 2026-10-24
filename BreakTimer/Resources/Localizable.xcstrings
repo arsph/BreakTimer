@@ -2344,6 +2344,22 @@
         }
       }
     },
+    "Zu viele Registrierungen von diesem Netzwerk. Bitte versuche es in einer Stunde erneut.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu viele Registrierungen von diesem Netzwerk. Bitte versuche es in einer Stunde erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Too many sign-ups from this network. Please try again in an hour."
+          }
+        }
+      }
+    },
     "Zu viele Versuche. Bitte warte einen Moment.": {
       "localizations": {
         "de": {

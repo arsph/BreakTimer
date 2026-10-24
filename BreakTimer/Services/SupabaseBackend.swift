@@ -54,6 +54,10 @@ enum SupabaseBackend {
 enum BackendError {
     static func userMessage(_ error: any Error) -> String {
         if let auth = error as? AuthError {
+            // Rejected by the Before User Created hook (supabase/migrations/20261024000000_signup_ip_limit.sql).
+            if auth.message.contains("signup_ip_limit") {
+                return String(localized: "Zu viele Registrierungen von diesem Netzwerk. Bitte versuche es in einer Stunde erneut.")
+            }
             switch auth.errorCode {
             case .invalidCredentials: return String(localized: "E-Mail oder Passwort ist falsch.")
             case .emailNotConfirmed: return String(localized: "Bitte bestätige zuerst deine E-Mail-Adresse.")
